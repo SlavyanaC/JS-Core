@@ -20,19 +20,17 @@ function solve(arr) {
             hasMilk ? (drink.sugarPrice = +orderTokens[3] === 0 ? 0 : 0.1) :
                       (drink.sugarPrice = +orderTokens[2] === 0 ? 0 : 0.1)
         }
-
-        let drinkPrice = drinkPrices[drink.caffeineType] === 'tea' ? drinkPrices['tea'] : drinkPrices[drink.caffeineType];
+        let drinkPrice = drinkPrices[drink.caffeineType];
         drink.totalPrice = (+(drinkPrice * drink.milkMultiplier).toFixed(1) + drink.sugarPrice);
         let areCoinsEnough = coinsInserted >= drink.totalPrice;
-        let absDiff = Math.abs(drink.totalPrice - coinsInserted).toFixed(2);
+        let absDiff = Math.abs(drink.totalPrice - coinsInserted);
         let result;
         if (areCoinsEnough) {
-            result = `You ordered ${drink.name}. Price: ${drink.totalPrice.toFixed(2)}$ Change: ${absDiff}$`;
+            result = `You ordered ${drink.name}. Price: ${drink.totalPrice.toFixed(2)}$ Change: ${absDiff.toFixed(2)}$`;
             incomeReport += +drink.totalPrice;
         } else {
-            result = `Not enough money for ${drink.name}. Need ${absDiff}$ more.`;
+            result = `Not enough money for ${drink.name}. Need ${absDiff.toFixed(2)}$ more.`;
         }
-
         console.log(result);
     }
 
