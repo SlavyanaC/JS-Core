@@ -1,16 +1,23 @@
-$(() => {
-    monkeys.forEach(monkey => {
-        let html = $(getHtml(monkey));
-        html.find('button').on('click', () => {
-            $(`#${monkey.id}`).css('display', 'block');
+$(async () => {
+    await loadMonkeys();
+
+    async function loadMonkeys() {
+        let allMonkeysHtml = await $.ajax({
+            url: './allMonkeys.hbs'
         });
 
-        $('.monkeys').append(html);
-    });
+        let monkeyHtml = await $.ajax({
+            url: './monkey.hbs'
+        });
 
-    function getHtml(monkey) {
-        let source = $('#monkey-template').html();
-        let template = Handlebars.compile(source);
-        return template(monkey);
+        let allMonkeysTemplate = Handlebars.compile(allMonkeysHtml);
+        let monkeyTemplate = Handlebars.compile(monkeyHtml);
+        let context = {monkeys};
+        Handlebars.registerPartial('monkey', monkeyTemplate);
+        $('div.monkeys').html(allMonkeysTemplate(context));
     }
 });
+
+function showInfo(id) {
+    $(`#${id}`).toggle();
+}
