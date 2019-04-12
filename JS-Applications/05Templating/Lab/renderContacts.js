@@ -2,7 +2,7 @@ $(() => {
     renderCards();
 
     async function renderCards() {
-        const source = await $.get('./contactTemplate.html');
+        const source = await $.get('./contact-card-template.hbs');
         const template = Handlebars.compile(source);
         const context = {contacts};
         const html = template(context);
