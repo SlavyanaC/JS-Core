@@ -1,0 +1,19 @@
+{{>header}}
+<section id="allSongsView">
+    <div class="background-spotify">
+        <div class="song-container">
+            {{#if isMyList}}
+                <h1>My Songs</h1>
+                {{> mySongs}}
+            {{else}}
+                <h1>All Songs</h1>
+                <a href="#/createSong">
+                    <button type="button" class="btn-lg btn-block new-song-btn">Add a new song</button>
+                </a>
+                {{> otherSongs}}
+                {{> mySongs}}
+            {{/if}}
+        </div>
+    </div>
+</section>
+{{>footer}}
