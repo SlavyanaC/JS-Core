@@ -1,0 +1,9 @@
+{{> header}}
+<div id="main">
+    {{#if isAuthenticated}}
+        {{> memeFeed}}
+    {{else}}
+        {{> anonymous}}
+    {{/if}}
+   </div>
+{{> footer}}

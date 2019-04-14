@@ -1,0 +1,9 @@
+<div id="meme-feed">
+    <h1>Meme Feed</h1>
+    {{#each memesFeed}}
+        {{> meme}}
+    {{/each}}
+    {{#if isEmpty}}
+        <p class="no-memes">No memes in database.</p>
+    {{/if}}
+</div>
