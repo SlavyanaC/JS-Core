@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee Bill</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<h2>Coffee Bill</h2>
+<table id="bill">
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody id="product-list"></tbody>
+    <tfoot>
+    <tr>
+        <td>Total:</td>
+        <td>0.00</td>
+    </tr>
+    </tfoot>
+</table>
+<section id="add-product">
+    <h3>Add new product</h3>
+    <label>
+        <span>
+            Product:
+        </span>
+        <input type="text">
+    </label>
+    <label>
+        <span>
+            Price:
+        </span>
+        <input type="number">
+    </label>
+    <button onclick="addProduct()">Add</button>
+</section>
+
+<script>
+    function addProduct() {
+        let $inputFields = $('input');
+
+        let $productField = $inputFields.eq(0);
+        let $priceField = $inputFields.eq(1);
+
+        if (!isNaN($priceField.val()) && $priceField.val() > 0 && $productField.val() && $priceField.val()) {
+            let $table = $('#product-list');
+            let price = $priceField.val();
+            let row = `<tr><td>${$productField.val()}</td><td>${price}</td></tr>`;
+            $table.append(row);
+
+            let tds = Array.from($('td'));
+            let $currentTotal = $(tds[tds.length - 1]);
+
+            let temp = $currentTotal.text();
+            let total = +temp + +$priceField.val();
+            $currentTotal.text(total);
+
+            $productField.val('');
+            $priceField.val('');
+        }
+    }
+</script>
+
+</body>
+</html>
